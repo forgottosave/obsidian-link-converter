@@ -44,7 +44,7 @@ for file in "${files[@]}"; do
 			# remove any obsidian sugar (#chapter and |replace_name)
 			replace_name="${match##*|}"
 			file_link="${match%'#'*}"
-			file_link="${match%'|'*}"
+			file_link="${file_link%'|'*}"
 
 			# find file that matches the link text
 			searchdir="$path"
