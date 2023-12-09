@@ -10,15 +10,15 @@
 - [a # in alt-name](unsuspicious.md)
 - [a / in alt-name](unsuspicious.md)
 - [a & in alt-name](unsuspicious.md)
-#### different files with same name TODO
-- [[subfolder 1/normalnote|normalnote]] in sf 1
-- [[subfolder 1/subfolder 1-1/normalnote|normalnote]] in sf 1-1
-- [[subfolder 1/subfolder 1-2/normalnote|normalnote]] in sf 1-2
+#### different files with same name
+- [normalnote](normalnote.md) in sf 1
+- [normalnote](subfolder 1-1/normalnote.md) in sf 1-1
+- [normalnote](subfolder 1-2/normalnote.md) in sf 1-2
 #### self reference
 - [linktest](linktest.md)
 - [this](linktest.md)
-#### Github- / Pandoc-Style Chapters TODO
-- [unsuspicious#Head](unsuspicious.md)
-- [unsuspicious#Second Head](unsuspicious.md)
-- [self referred chapter reference](unsuspicious.md)
+#### Github- / Pandoc-Style Chapters
+- [unsuspicious#Head](unsuspicious.md#head)
+- [unsuspicious#Second Head](unsuspicious.md#second-head)
+- [self referred chapter reference](unsuspicious.md#second-head)
 
