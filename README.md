@@ -8,4 +8,4 @@ Provide a file, or folder as the first argument:
 ```
 
 ## Warning
-There currently is a bug, if the replacename \[\[name|*replacename*\]\] contains certain special characters. But I'm working on it :)
+Some special cases might not work yet, run `test.sh` to see which special cases fail.
