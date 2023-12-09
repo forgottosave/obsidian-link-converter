@@ -10,7 +10,9 @@ cp -r TestSet/ working-test-set/
 while IFS= read -r line1 && IFS= read -r line2 <&3; do
     if [[ ${line2:0:5} == "#### " ]]; then
     	echo ""
+    	echo ""
     	echo ">> TEST: ${line1:5} >>>>>>>>>>>>>"
+    	echo ""
     	continue
     fi
     if [ "$line1" != "$line2" ]; then
