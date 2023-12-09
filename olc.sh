@@ -27,6 +27,7 @@ for file in "${files[@]}"; do
 			# remove any obsidian sugar (like #chapter and |alternativename)
 			linkreplacename="${match##*|}"
 			link="${match%'#'*}"
+			link="${match%'|'*}"
         	# Remove the found match from the line to find the next match
     	    line="${line#*${BASH_REMATCH[0]}}"
 			# find file that matches the link text
