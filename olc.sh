@@ -21,7 +21,7 @@ for file in "${files[@]}"; do
 	# find and replace all links in file
 	pattern="\[\[([^]]*)\]\]"
 	while IFS= read -r line; do
-	    # Continue finding matches in the line until there are no more
+	    # replace every match in the line
 	    while [[ $line =~ $pattern ]]; do
     	    match="${BASH_REMATCH[1]}"
 			# remove any obsidian sugar (like #chapter and |alternativename)
@@ -31,9 +31,14 @@ for file in "${files[@]}"; do
         	# Remove the found match from the line to find the next match
     	    line="${line#*${BASH_REMATCH[0]}}"
 			# find file that matches the link text
-			linkfile=$(find "$path" -type f -iname "$link.*")
+			searchdir="$path"
+			[ "${link%/*}" = "$link" ] || searchdir="$searchdir${link%/*}"
+			searchfile="${link##*/}.*"
+			echo "  =>>> find $searchfile in $searchdir"
+			linkfile=$(find "$searchdir" -type f -iname "$searchfile" | head -n 1)
 			# convert path to relative path of file
 			relative_path=$(realpath "$linkfile" --relative-to="$file")
+			echo "found file $relative_path"
 			# fix issues in relative path
 			if [[ $relative_path == . ]]; then
     			relative_path=$(basename "$file")
@@ -41,6 +46,7 @@ for file in "${files[@]}"; do
 			if [[ $relative_path == ../* ]]; then
     			relative_path="${relative_path:3}"
 			fi
+			#relative_path=$(eval "$relative_path" | head -n 1)
 			# replace markdown link
 			find="\[\[$match\]\]"
 			replace="\[$linkreplacename\]\($relative_path\)"
