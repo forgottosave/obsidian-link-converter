@@ -34,6 +34,13 @@ for file in "${files[@]}"; do
 			linkfile=$(find "$path" -type f -iname "$link.*")
 			# convert path to relative path of file
 			relative_path=$(realpath "$linkfile" --relative-to="$file")
+			# fix issues in relative path
+			if [[ $relative_path == . ]]; then
+    			relative_path=$(basename "$file")
+			fi
+			if [[ $relative_path == ../* ]]; then
+    			relative_path="${relative_path:3}"
+			fi
 			# replace markdown link
 			find="\[\[$match\]\]"
 			replace="\[$linkreplacename\]\($relative_path\)"
