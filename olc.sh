@@ -72,7 +72,8 @@ for file in "${files[@]}"; do
 			# replace markdown link
 			find="\[\[$match\]\]"
 			replace="\[$replace_name\]\($relative_path$chapter\)"
-			echo "  [[$match]]  ->  [$replace_name]($relative_path$chapter)"
+			replace="${replace//&/\\\&}"
+			echo "  [[$match]]  ->  [${replace_name//&/\\\&}]($relative_path$chapter)"
 			sed -i "s#${find//#/\\#}#${replace//#/\\#}#g" "$file"
     	done
 
