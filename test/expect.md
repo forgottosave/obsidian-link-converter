@@ -2,8 +2,8 @@
 - [unsuspicious](unsuspicious.md)
 - [unsus](./unsuspicious.md)
 #### special character links
-- [Note With(some$special%characters](../subfolder 2/subfolder 2-1/Note With(some$special%characters.md)
-- [special characters in name](../subfolder 2/subfolder 2-1/Note With(some$special%characters.md)
+- [Note With-(some:$special&%characters](../subfolder 2/subfolder 2-1/Note With-(some:$special&%characters.md)
+- [special characters in name](../subfolder 2/subfolder 2-1/Note With-(some:$special&%characters.md)
 - [Note With Space In Name](../subfolder 2/Note With Space In Name.md)
 - [spaces in name](../subfolder 2/Note With Space In Name.md)
 #### special characters in alternative name
