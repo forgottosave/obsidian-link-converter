@@ -41,8 +41,16 @@ for file in "${files[@]}"; do
 			# remove the found match from the line to find the next match
     	    line="${line#*${BASH_REMATCH[0]}}"
 
-			# remove any obsidian sugar (#chapter and |replace_name)
+			# split match into file_link, #chapter and |replace_name
 			replace_name="${match##*|}"
+			chapter=""
+			if [[ ${match%|*} =~ "#" ]]; then
+				chapter="${match%|*}"
+				chapter="${chapter##*'#'}"
+				# convert chapter
+				chapter="#${chapter,,}"
+				chapter="${chapter// /-}"
+			fi
 			file_link="${match%'#'*}"
 			file_link="${file_link%'|'*}"
 
@@ -63,8 +71,8 @@ for file in "${files[@]}"; do
 
 			# replace markdown link
 			find="\[\[$match\]\]"
-			replace="\[$replace_name\]\($relative_path\)"
-			echo "  [[$match]]  ->  [$replace_name]($relative_path)"
+			replace="\[$replace_name\]\($relative_path$chapter\)"
+			echo "  [[$match]]  ->  [$replace_name]($relative_path$chapter)"
 			sed -i "s#${find//#/\\#}#${replace//#/\\#}#g" "$file"
     	done
 
