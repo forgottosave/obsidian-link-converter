@@ -10,6 +10,9 @@
 - [a # in alt-name](unsuspicious.md)
 - [a / in alt-name](unsuspicious.md)
 - [a & in alt-name](unsuspicious.md)
+#### special characters in folder
+- [file-in-special-folder](../subfolder 2/subfolder 2-1/special-char-folders & files/file-in-special-folder.md)
+- [special folder file](../subfolder 2/subfolder 2-1/special-char-folders & files/file-in-special-folder.md)
 #### different files with same name
 - [normalnote](normalnote.md) in sf 1
 - [normalnote](subfolder 1-1/normalnote.md) in sf 1-1
