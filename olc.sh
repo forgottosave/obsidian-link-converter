@@ -21,7 +21,7 @@ elif [ -d "$path" ]; then
 	# find all files in directory (works with spaces in filename)
 	while IFS= read -r -d '' file; do
     	files+=("$file")
-	done < <(find "$path" -type f -print0 | grep -zvE "/(\.obsidian|\.git)/")
+	done < <(find "$path" -type f -print0 | grep -zE ".md" | grep -zvE "/(\.obsidian|\.git)/")
 else
 	echo "error: $1 is not a file or folder"
 	exit
@@ -57,7 +57,8 @@ for file in "${files[@]}"; do
 			# find file that matches the link text
 			searchdir="$path"
 			[ "${file_link%/*}" = "$file_link" ] || searchdir="$searchdir${file_link%/*}"
-			searchfile="${file_link##*/}.*"
+			searchfile="${file_link##*/}*"
+			echo "  search file $searchfile in $searchdir"
 			file_link=$(find "$searchdir" -type f -iname "$searchfile" | head -n 1)
 
 			# convert path to relative path of file
