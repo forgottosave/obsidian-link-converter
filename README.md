@@ -1,10 +1,11 @@
 # Obsidian-link Converter
 This script replaces all obsidian-style links in a file, or folder with 'proper' markdown links.
 
-`[[markdownlink#chapter|replacename]]` $\rightarrow$ `[replacename](path/to/markdownlink.md)`
+`[[markdownlink#chapter|replacename]]` $\rightarrow$ `[replacename](relative/path/to/markdownlink.md)`
 
 More simple links (without a #chapter, or |replacename) are of course also possible.
-Be aware, that chapters are currently ignored.
+
+*inline-html images currently don't work in Obsidian, only in most other markdown editors (and Github). To stop the html-image conversion, set the variable on top of the script to false*
 
 ## Usage
 The goal of this script is to be very light weight, compared to other big obsidian plugins, that exist. This is also why `olc.sh` is the only required file to ensure functionality. Make sure that is has execution rights with `chmod +x olc.sh` before using it.
@@ -16,8 +17,7 @@ Provide a file, or folder as the first argument:
 Changes are made in-place.
 
 ## Warning
-There are special cases not covered yet (like having `&` in the part behind a `|`).
-It is recommended to create a backup before starting the conversion, just in case.
+It is recommended to create a backup before using the script, just in case...
+- some special case was not concidered in the script
+- some conversion did not go as you wanted it
 
-The `test.sh` includes some tests with special cases and can be run, to see which cases are covered and which not.
-Please create a new issue, should you find that an important case is missing in the tests.

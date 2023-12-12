@@ -11,6 +11,8 @@
 #  to 'proper' markdown-style links in a directory.                 #
 #####################################################################
 
+convert_img_html_format=true
+convert_to_html_escaped_paths=true
 
 # check if given path is file or folder
 path="$PWD/$1"
@@ -69,12 +71,27 @@ for file in "${files[@]}"; do
 			elif [[ $relative_path == ../* ]]; then
     			relative_path="${relative_path:3}"
 			fi
+			# html-escape spaces
+			unescaped=$relative_path
+			if $convert_to_html_escaped_paths; then
+				relative_path=${relative_path// /%20}
+			fi
 
-			# replace markdown link
+			# build "find" and "replace"
 			find="\[\[$match\]\]"
 			replace="\[$replace_name\]\($relative_path$chapter\)"
 			replace="${replace//&/\\\&}"
-			echo "  [[$match]]  ->  [${replace_name//&/\\\&}]($relative_path$chapter)"
+			# special conversions
+			if $convert_img_html_format; then
+				if [[ ${unescaped} =~ ".png" ]]; then
+					echo "  image recognized"
+					width=""
+					[[ ${unescaped##*/} == ${replace_name%*.} ]] || width=" width=\"${replace_name}\""
+					replace="<img src=\"${unescaped// /%20}\"$width>"
+				fi
+			fi
+			# replace markdown link
+			echo "  $find  ->  $replace"
 			sed -i "s#${find//#/\\#}#${replace//#/\\#}#g" "$file"
     	done
 
