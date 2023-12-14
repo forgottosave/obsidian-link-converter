@@ -11,8 +11,9 @@
 #  to 'proper' markdown-style links in a directory.                 #
 #####################################################################
 
-convert_img_html_format=true
-convert_to_html_escaped_paths=true
+stop_img_conversion=false			# supress any image-link conversino
+convert_img_html_format=true		# convert images to <img src="...">
+convert_to_html_escaped_paths=true	# replaces spaces in paths with %20
 
 # check if given path is file or folder
 path="$PWD/$1"
@@ -60,7 +61,6 @@ for file in "${files[@]}"; do
 			searchdir="$path"
 			[ "${file_link%/*}" = "$file_link" ] || searchdir="$searchdir${file_link%/*}"
 			searchfile="${file_link##*/}*"
-			echo "  search file $searchfile in $searchdir"
 			file_link=$(find "$searchdir" -type f -iname "$searchfile" | head -n 1)
 
 			# convert path to relative path of file
@@ -82,13 +82,14 @@ for file in "${files[@]}"; do
 			replace="\[$replace_name\]\($relative_path$chapter\)"
 			replace="${replace//&/\\\&}"
 			# special conversions
-			if $convert_img_html_format; then
-				if [[ ${unescaped} =~ ".png" ]]; then
-					echo "  image recognized"
+			if [[ ${unescaped} =~ ".png" ]]; then
+				if $stop_img_conversion; then
+					replace="$find"
+				elif $convert_img_html_format; then
 					width=""
 					[[ ${unescaped##*/} == ${replace_name%*.} ]] || width=" width=\"${replace_name}\""
 					replace="<img src=\"${unescaped// /%20}\"$width>"
-				fi
+				fi			
 			fi
 			# replace markdown link
 			echo "  $find  ->  $replace"
