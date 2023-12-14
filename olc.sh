@@ -82,7 +82,7 @@ for file in "${files[@]}"; do
 			replace="\[$replace_name\]\($relative_path$chapter\)"
 			replace="${replace//&/\\\&}"
 			# special conversions
-			if [[ ${unescaped} =~ ".png" ]]; then
+			if [[ ${unescaped} == *.png || ${unescaped} == *.jpg || ${unescaped} == *.jpeg ]]; then
 				if $stop_img_conversion; then
 					replace="$find"
 				elif $convert_img_html_format; then
